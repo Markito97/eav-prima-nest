@@ -1,0 +1,74 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Attribute {
+  id Int @id() @default(autoincrement())
+  name String
+  attributeType AttributeType @relation(fields: [attributeTypeId], references: [id])
+  attributeTypeId Int
+
+  attributeObjectTypes AttributeObjectTypes[]
+}
+
+model AttributeType {
+  id Int @id() @default(autoincrement())
+  name String
+  attribute Attribute[]
+}
+
+
+model ObjectType {
+  id Int @id @default(autoincrement())
+  name String
+  attributeObjectTypes AttributeObjectTypes[] 
+  entityObjectTypes EntityObject[]
+}
+
+model AttributeObjectTypes {
+  id Int @id() @default(autoincrement())
+  objectTypeId     Int
+  attributeId      Int
+
+  objectType       ObjectType               @relation(fields: [objectTypeId], references: [id])
+  attribute        Attribute                @relation(fields: [attributeId], references: [id])
+
+  attributeValues AttributeValue[]
+}
+
+model AttributeValue {
+  id Int @id() @default(autoincrement())
+  entityObject EntityObject @relation(fields: [entityObjectId], references: [id])
+  entityObjectId Int
+
+  attributeObjectType AttributeObjectTypes @relation(fields: [attributeObjectTypeId], references: [id])
+  attributeObjectTypeId Int
+
+  valueStrings ValueString[]
+}
+
+model EntityObject {
+  id Int @id() @default(autoincrement())
+  objectType ObjectType @relation(fields: [objectTypeId], references: [id])
+  objectTypeId Int
+  attributeValues AttributeValue[]
+}
+
+model ValueString {
+  id Int @id() @default(autoincrement())
+  attributValue AttributeValue @relation(fields: [attributeValueId], references: [id])
+  attributeValueId Int 
+  value String
+}
