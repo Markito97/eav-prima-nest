@@ -13,6 +13,9 @@ export class EntityObjectService {
             valueStrings: true,
           },
         },
+        entitySourceRelations: true,
+        entityTargetRelations: true,
+        objectType: true,
       },
     });
   }

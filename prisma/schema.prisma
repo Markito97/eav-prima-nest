@@ -95,6 +95,7 @@ model RelationObjectType {
 
 model RelationType {
  id Int @id() @default(autoincrement())
+ name String
  relationObjectTypes RelationObjectType[]
  relationType RelationObject[]
 }
