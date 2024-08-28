@@ -35,6 +35,10 @@ model ObjectType {
   name String
   attributeObjectTypes AttributeObjectTypes[] 
   entityObjectTypes EntityObject[]
+
+  sourceTypes RelationObjectType[] @relation("SourceTypeRelation")
+
+  targetTypes RelationObjectType[] @relation("TargetTypeRelation")
 }
 
 model AttributeObjectTypes {
@@ -64,6 +68,8 @@ model EntityObject {
   objectType ObjectType @relation(fields: [objectTypeId], references: [id])
   objectTypeId Int
   attributeValues AttributeValue[]
+  entitySourceRelations RelationObject[] @relation("EntitySourceRelation")
+  entityTargetRelations RelationObject[] @relation("EntityTargetRelation")
 }
 
 model ValueString {
@@ -71,4 +77,36 @@ model ValueString {
   attributValue AttributeValue @relation(fields: [attributeValueId], references: [id])
   attributeValueId Int 
   value String
+}
+
+model RelationObjectType {
+  id Int @id() @default(autoincrement())
+
+  relationTypeId Int?
+  relationType RelationType? @relation(fields: [relationTypeId], references: [id])
+
+  sourceTypeId Int?
+  sourceType ObjectType? @relation("SourceTypeRelation", fields: [sourceTypeId], references: [id])
+
+  targetTypeId Int?
+  targetType ObjectType? @relation("TargetTypeRelation",fields: [targetTypeId], references: [id])
+
+}
+
+model RelationType {
+ id Int @id() @default(autoincrement())
+ relationObjectTypes RelationObjectType[]
+ relationType RelationObject[]
+}
+
+model RelationObject {
+  id Int @id() @default(autoincrement())
+  relationTypeId Int?
+  relationType RelationType? @relation(fields: [relationTypeId], references: [id])
+
+  entitySourceId Int?
+  entitySource EntityObject? @relation("EntitySourceRelation", fields: [entitySourceId], references: [id])
+  entityTargetId Int?
+  enitityTarget EntityObject? @relation("EntityTargetRelation", fields: [entityTargetId], references: [id])
+
 }

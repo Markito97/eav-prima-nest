@@ -6,7 +6,15 @@ export class EntityObjectService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async findAll() {
-    return await this.prismaService.entityObject.findMany();
+    return await this.prismaService.entityObject.findMany({
+      include: {
+        attributeValues: {
+          include: {
+            valueStrings: true,
+          },
+        },
+      },
+    });
   }
 
   async findOne(id: number) {

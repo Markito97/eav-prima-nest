@@ -9,8 +9,8 @@ import {
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { ValueStringService } from './value-string.service';
-import { CreateEntityObjectDto } from 'src/entity-object/dto/create-entity-object.dto';
-import { UpdateEntityObjectDto } from 'src/entity-object/dto/update-entity-object.dto';
+import { CreateValueStringDto } from './dto/create-value-string.dto';
+import { UpdateValueStringDto } from './dto/update-value-string.dto';
 
 @ApiTags('value-string')
 @Controller('value-string')
@@ -28,13 +28,13 @@ export class ValueStringController {
   }
 
   @Post()
-  async create(@Body() createEntityOjectDto: CreateEntityObjectDto) {
-    return await this.valueStringService.create(createEntityOjectDto);
+  async create(@Body() createValueStringDto: CreateValueStringDto) {
+    return await this.valueStringService.create(createValueStringDto);
   }
 
   @Put()
-  async update(@Body() updateEntityObjectDto: UpdateEntityObjectDto) {
-    return await this.valueStringService.update(updateEntityObjectDto);
+  async update(@Body() updateValueStringDto: UpdateValueStringDto) {
+    return await this.valueStringService.update(updateValueStringDto);
   }
 
   @Delete(':id')

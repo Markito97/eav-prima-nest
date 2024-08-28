@@ -6,7 +6,11 @@ export class ValueStringService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async findAll() {
-    return await this.prismaService.valueString.findMany();
+    return await this.prismaService.valueString.findMany({
+      include: {
+        attributValue: true,
+      },
+    });
   }
 
   async findOne(id: number) {
