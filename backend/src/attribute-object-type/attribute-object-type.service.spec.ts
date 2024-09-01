@@ -9,7 +9,9 @@ describe('AttributeObjectTypeService', () => {
       providers: [AttributeObjectTypeService],
     }).compile();
 
-    service = module.get<AttributeObjectTypeService>(AttributeObjectTypeService);
+    service = module.get<AttributeObjectTypeService>(
+      AttributeObjectTypeService,
+    );
   });
 
   it('should be defined', () => {
