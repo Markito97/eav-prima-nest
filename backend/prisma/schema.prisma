@@ -73,7 +73,7 @@ model EntityObject {
 
 model ValueString {
   id Int @id() @default(autoincrement())
-  attributValue AttributeValue @relation(fields: [attributeValueId], references: [id])
+  attributeValue AttributeValue @relation(fields: [attributeValueId], references: [id])
   attributeValueId Int 
   value String
 }
@@ -107,6 +107,6 @@ model RelationObject {
   entitySourceId Int?
   entitySource EntityObject? @relation("EntitySourceRelation", fields: [entitySourceId], references: [id])
   entityTargetId Int?
-  enitityTarget EntityObject? @relation("EntityTargetRelation", fields: [entityTargetId], references: [id])
+  entityTarget EntityObject? @relation("EntityTargetRelation", fields: [entityTargetId], references: [id])
 
 }
