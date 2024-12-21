@@ -25,9 +25,27 @@ import { ErrorDto } from 'src/common/ErrorDto';
 export class AttributeController {
   constructor(private readonly attributeService: AttributeService) {}
 
-  @ApiOperation({ summary: 'Get list of attribute-types' })
+  @ApiOperation({ summary: 'Get list of attributes' })
   @ApiOkResponse({
-    description: 'Successfully fetched the list of attribute',
+    description: 'Successfully fetched the list of attributes',
+    type: [AttributeDto],
+  })
+  @ApiNotFoundResponse({
+    description: 'Attributes not found.',
+    type: ErrorDto,
+  })
+  @ApiInternalServerErrorResponse({
+    description: 'Internal server error attributes',
+    type: ErrorDto,
+  })
+  @Get()
+  async findAll() {
+    return await this.attributeService.findAll();
+  }
+
+  @ApiOperation({ summary: 'Get attribute' })
+  @ApiOkResponse({
+    description: 'Successfully fetched the attribute',
     type: [AttributeDto],
   })
   @ApiNotFoundResponse({
@@ -38,26 +56,36 @@ export class AttributeController {
     description: 'Internal server error attribute',
     type: ErrorDto,
   })
-  @Get()
-  async findAll() {
-    return await this.attributeService.findAll();
-  }
-
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return await this.attributeService.findOne(+id);
   }
 
+  @ApiOperation({ summary: 'Create attribute' })
+  @ApiOkResponse({
+    description: 'Successfully created attribute',
+    type: AttributeDto,
+  })
   @Post()
   async create(@Body() createAttributeDto: CreateAttributeDto) {
     return await this.attributeService.create(createAttributeDto);
   }
 
+  @ApiOperation({ summary: 'Update attribute' })
+  @ApiOkResponse({
+    description: 'Successfully updated attribute',
+    type: AttributeDto,
+  })
   @Put()
   async update(@Body() updateAttributeDto: UpdateAttributeDto) {
     return await this.attributeService.update(updateAttributeDto);
   }
 
+  @ApiOperation({ summary: 'Delete attribute' })
+  @ApiOkResponse({
+    description: 'Successfully deleted attribute',
+    type: AttributeDto,
+  })
   @Delete(':id')
   async remove(@Param('id') id: string) {
     return await this.attributeService.remove(+id);
