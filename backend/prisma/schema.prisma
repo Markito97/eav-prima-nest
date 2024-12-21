@@ -19,7 +19,6 @@ model Attribute {
   name String
   attributeType AttributeType @relation(fields: [attributeTypeId], references: [id])
   attributeTypeId Int
-
   attributeObjectTypes AttributeObjectTypes[]
 }
 
