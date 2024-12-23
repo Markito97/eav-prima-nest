@@ -5,6 +5,10 @@ import { PrismaService } from 'src/prisma.service';
 export class RelationObjectTypeService {
   constructor(private readonly prismaService: PrismaService) {}
 
+  async findAll() {
+    return await this.prismaService.relationObjectType.findMany();
+  }
+
   async create(payload) {
     return await this.prismaService.relationObjectType.create({
       data: payload,
