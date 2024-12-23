@@ -8,7 +8,7 @@ export class ValueStringService {
   async findAll() {
     return await this.prismaService.valueString.findMany({
       include: {
-        attributValue: true,
+        attributeValue: true,
       },
     });
   }
