@@ -89,7 +89,6 @@ model RelationObjectType {
 
   targetTypeId Int?
   targetType ObjectType? @relation("TargetTypeRelation",fields: [targetTypeId], references: [id])
-
 }
 
 model RelationType {

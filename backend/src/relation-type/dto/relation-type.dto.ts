@@ -1,6 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateRelationTypeDto {
+export class RelationTypeDto {
+  @ApiProperty()
+  id: number;
+
   @ApiProperty()
   name: string;
 }
