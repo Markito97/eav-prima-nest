@@ -48,7 +48,7 @@ export class AttributeObjectTypeController {
   @ApiOperation({ summary: 'Get attribute-object-type' })
   @ApiOkResponse({
     description: 'Successfully fetched the attribute-object-type',
-    type: [AttributeObjectTypeDto],
+    type: AttributeObjectTypeDto,
   })
   @ApiNotFoundResponse({
     description: 'Attribute-object-type not found.',

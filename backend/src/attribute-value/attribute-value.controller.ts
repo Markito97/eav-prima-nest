@@ -46,7 +46,7 @@ export class AttributeValueController {
   @ApiOperation({ summary: 'Get attribute-value' })
   @ApiOkResponse({
     description: 'Successfully fetched the attribute-value',
-    type: [AttributeValueDto],
+    type: AttributeValueDto,
   })
   @ApiNotFoundResponse({
     description: 'Attribute-value not found.',

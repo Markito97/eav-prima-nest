@@ -46,7 +46,7 @@ export class EntityObjectController {
   @ApiOperation({ summary: 'Get entity-object' })
   @ApiOkResponse({
     description: 'Successfully fetched the entity-object',
-    type: [EntityObjectDto],
+    type: EntityObjectDto,
   })
   @ApiNotFoundResponse({
     description: 'Entity-object not found.',
